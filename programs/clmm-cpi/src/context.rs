@@ -68,33 +68,3 @@ pub struct SwapSingleV2<'info> {
     // tick_array_account_2
     // tick_array_account_...
 }
-
-#[derive(Accounts)]
-pub struct CollectRemainingRewards<'info> {
-    /// The founder who init reward info in berfore
-    pub reward_funder: Signer<'info>,
-    /// The funder's reward token account
-    #[account(mut)]
-    pub funder_token_account: Box<InterfaceAccount<'info, TokenAccount>>,
-    /// Set reward for this pool
-    #[account(mut)]
-    pub pool_state: AccountLoader<'info, PoolState>,
-    /// Reward vault transfer remaining token to founder token account
-    pub reward_token_vault: Box<InterfaceAccount<'info, TokenAccount>>,
-    /// The mint of reward token vault
-    #[account(
-        address = reward_token_vault.mint
-    )]
-    pub reward_vault_mint: Box<InterfaceAccount<'info, Mint>>,
-    #[account(address = token::ID)]
-    pub token_program: Program<'info, Token>,
-    /// Token program 2022
-    pub token_program_2022: Program<'info, Token2022>,
-
-    /// memo program
-    /// CHECK:
-    #[account(
-        address = spl_memo::id()
-    )]
-    pub memo_program: UncheckedAccount<'info>,
-}
