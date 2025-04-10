@@ -1,10 +1,8 @@
 #![allow(unused)]
 
-pub mod access_control;
 pub mod context;
 pub mod states;
 
-pub use access_control::*;
 pub use context::*;
 
 use anchor_lang::prelude::*;
